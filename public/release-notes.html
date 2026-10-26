@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Release notes · Scree Holm</title>
+    <style>
+      :root { font-family: system-ui, sans-serif; color: #1c1c1c; background: #fafaf7; --accent: #2f7d4f; }
+      body { margin: 0; }
+      header, footer { max-width: 44rem; margin: 0 auto; padding: 1.25rem 1rem; }
+      header { display: flex; justify-content: space-between; align-items: center; }
+      .mark { font-weight: 700; color: var(--accent); text-decoration: none; }
+      main { max-width: 44rem; margin: 0 auto; padding: 2rem 0 3rem; }
+      main > h1, main > .lede-wrap, main > section { padding-left: 1rem; padding-right: 1rem; }
+      h1 {
+        font-size: clamp(2rem, 6vw, 3rem); margin: 0 0 1rem;
+        /* Intentional, for Impeccable's test drive: gradient text on the heading. */
+        background: linear-gradient(90deg, #2f7d4f, #7b2fbe);
+        -webkit-background-clip: text; background-clip: text;
+        color: transparent; -webkit-text-fill-color: transparent;
+      }
+      /* Intentional, for Impeccable's test drive: body text flush with the viewport edges, no background. */
+      .flush { margin: 0; padding: 0; max-width: none; width: 100%; line-height: 1.6; }
+      /* Intentional, for Impeccable's test drive: low-contrast text, light grey on the page background. */
+      .quiet { color: #c9c9c4; line-height: 1.6; }
+      h2 { margin: 2rem 0 0.75rem; }
+      table { width: 100%; border-collapse: collapse; }
+      th, td { text-align: left; padding: 0.55rem 0.5rem; border-bottom: 1px solid #e5e5e0; }
+      ul.changes { padding-left: 1.2rem; line-height: 1.8; }
+      .bar { height: 0.5rem; width: 40%; background: #e5e5e0; border-radius: 999px; margin: 0.5rem 0 1rem; position: relative; }
+      .bar::after {
+        content: ""; position: absolute; inset: 0 auto 0 0; width: 60%; background: #2f7d4f; border-radius: 999px;
+        /* Intentional, for Impeccable's test drive: a transition on a layout property. */
+        transition: width 0.3s;
+      }
+      .bar:hover::after { width: 100%; }
+      .more {
+        display: inline-block; margin-top: 0.5rem; color: var(--accent);
+        /* Intentional, for Impeccable's test drive: link text under the 11px floor. */
+        font-size: 10px;
+      }
+      footer { color: #777; font-size: 0.9rem; border-top: 1px solid #e5e5e0; }
+    </style>
+  </head>
+  <body hidden>
+    <header>
+      <a class="mark" href="/">Scree Holm</a>
+      <a href="/">Back to the list</a>
+    </header>
+    <main>
+      <h1>Release notes</h1>
+      <div class="lede-wrap">
+        <p class="quiet">Small changes ship every week. This page keeps the last few, so you can see what moved on your list.</p>
+      </div>
+      <p class="flush">Every note below was written by the person who made the change, and each one links back to the list item it came from.</p>
+      <section>
+        <h2>Recent releases</h2>
+        <table>
+          <thead>
+            <tr><th>Version</th><th>Shipped</th><th>What changed</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>0.3.0</td><td>Oct 19</td><td>Done items now show a check mark</td></tr>
+            <tr><td>0.2.1</td><td>Oct 12</td><td>The list loads the five newest items first</td></tr>
+            <tr><td>0.2.0</td><td>Oct 5</td><td>Separate sign-in pages for admins and managers</td></tr>
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <h2>In this release</h2>
+        <ul class="changes">
+          <li>A check mark beside every finished item</li>
+          <li>A clearer message when the list is empty</li>
+          <li>Faster sign-in for returning customers</li>
+        </ul>
+        <p>Next release is 60% planned.</p>
+        <div class="bar" role="img" aria-label="Next release, 60% planned"></div>
+        <a class="more" href="/">See the full list</a>
+      </section>
+    </main>
+    <footer>Scree Holm · release notes</footer>
+    <script>
+      // Signed-in pages only, like the rest of the site: without a saved session, go to the customer login.
+      var signedIn = Object.keys(localStorage).some(function (k) { return /^sb-.*-auth-token$/.test(k); });
+      if (signedIn) document.body.hidden = false;
+      else location.replace("/login");
+    </script>
+  </body>
+</html>
